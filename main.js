@@ -1,53 +1,79 @@
-//import './style.css'
-//import javascriptLogo from './javascript.svg'
-//import viteLogo from '/vite.svg'
-//import { setupCounter } from './counter.js'
-
-
-
-//document.querySelector('#app').innerHTML = `
-//  <div>
-//    <a href="https://vitejs.dev" target="_blank">
-//      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-//    </a>
-//    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-//      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-//    </a>
-//    <h1>Hello Vite!</h1>
-//    <div class="card">
-//      <button id="counter" type="button"></button>
-//    </div>
-//    <p class="read-the-docs">
-//      Click on the Vite logo to learn more
-//    </p>
-//  </div>
-//`
-//
-//setupCounter(document.querySelector('#counter'))
-
 import { Terminal } from '@xterm/xterm';
+import { FitAddon } from 'xterm-addon-fit';
 import { io } from "socket.io-client";
 import '@xterm/xterm/css/xterm.css'
 
 let term = new Terminal({
-    cursorBlink: true,
+    fontFamily: '"Cascadia Code", Menlo, monospace',
+    theme: {
+        foreground: '#F8F8F8',
+        background: '#2D2E2C',
+        selection: '#5DA5D533',
+        black: '#1E1E1D',
+        brightBlack: '#262625',
+        red: '#CE5C5C',
+        brightRed: '#FF7272',
+        green: '#5BCC5B',
+        brightGreen: '#72FF72',
+        yellow: '#CCCC5B',
+        brightYellow: '#FFFF72',
+        blue: '#5D5DD3',
+        brightBlue: '#7279FF',
+        magenta: '#BC5ED1',
+        brightMagenta: '#E572FF',
+        cyan: '#5DA5D5',
+        brightCyan: '#72F0FF',
+        white: '#F8F8F8',
+        brightWhite: '#FFFFFF'
+      },
+    allowProposedApi: true,
+    cursorBlink: false,
     macOptionIsMeta: true,
-    scrollback: true,
+    scrollback: 1000,
+    cursorStyle: 'block',
+    scrollOnUserInput: false,
 });
-console.log(term.cols, term.rows)
+console.log(term.cols, term.rows);
 
+// load term
 term.open(document.getElementById('terminal'));
 
+// fit addon
+const fitAddon = new FitAddon();
+term.loadAddon(fitAddon);
+fitAddon.fit();
+
+// create socket io
 const sio = io('ws://localhost:8080', {
     path: '/socket.io/',
-    transports: ['websocket']
+    transports: ['websocket'],
+    query: {
+        "cols": term.cols,
+        "rows": term.rows,
+    }
+});
+
+sio.on('connect', () => {
+    term.clear();
 })
 
-sio.on('message', (message) => {
+sio.on('pty', (message) => {
     term.write(message)
-})
+});
 
+// on input terminal
 term.onData((data) => {
-    sio.emit("message", data)
-})
+    sio.emit("pty", data)
+});
 
+// on resize terminal
+// TODO: make debounce
+window.addEventListener("resize", (event) => {
+    fitAddon.fit()
+    sio.emit("resize", {
+        "cols": term.cols,
+        "rows": term.rows,
+    })
+});
+
+document.getElementById('terminal').focus();
