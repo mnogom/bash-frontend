@@ -1,11 +1,22 @@
 import { Terminal } from '@xterm/xterm';
 import { FitAddon } from '@xterm/addon-fit';
 import { WebLinksAddon } from '@xterm/addon-web-links';
-import { io } from "socket.io-client";
+import { io } from 'socket.io-client';
 
 import '@xterm/xterm/css/xterm.css';
 
+// create elements
+const elements = {
+    getApp: () => document.getElementById('app'),
+    getTerminalHead: () => document.getElementById('terminal-head'),
+    getTerminal: () => document.getElementById('terminal'),
+    getTerminalScreen: () => document.getElementsByClassName('xterm-screen')[0],
+    getTerminalViewport: () => document.getElementsByClassName('xterm-viewport')[0],
+    getTerminalScrollArea: () => document.getElementsByClassName('xterm-scroll-area')[0],
+    getSioStatus: () => document.getElementById('sio-status'),
+};
 
+// create terminal
 const terminal = new Terminal({
     fontFamily: '"Cascadia Code", Menlo, monospace',
     theme: {
@@ -38,7 +49,7 @@ const terminal = new Terminal({
 });
 
 // load terminal and make focus
-terminal.open(document.getElementById('terminal'));
+terminal.open(elements.getTerminal());
 terminal.focus();
 
 // fit addon
@@ -54,13 +65,18 @@ const sio = io('ws://localhost:8080', {
     path: '/socket.io/',
     transports: ['websocket'],
     query: {
-        "cols": terminal.cols,
-        "rows": terminal.rows,
+        'cols': terminal.cols,
+        'rows': terminal.rows,
     }
 });
 
 sio.on('connect', () => {
     terminal.clear();
+    elements.getSioStatus().classList = 'sio-icon sio-connected';
+})
+
+sio.on('disconnect', () => {
+    elements.getSioStatus().classList = 'sio-icon sio-not-connected';
 })
 
 sio.on('pty', (message) => {
@@ -69,15 +85,14 @@ sio.on('pty', (message) => {
 
 // on input terminal
 terminal.onData((data) => {
-    sio.emit("pty", data)
+    sio.emit('pty', data)
 });
 
 // on resize terminal
-// TODO: make debounce
-window.addEventListener("resize", (event) => {
+window.addEventListener('resize', (event) => {
     fitAddon.fit()
-    sio.emit("resize", {
-        "cols": terminal.cols,
-        "rows": terminal.rows,
-    })
+    sio.emit('resize', {
+        'cols': terminal.cols,
+        'rows': terminal.rows,
+    });
 });

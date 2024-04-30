@@ -1,5 +1,11 @@
+html,body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
 body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: "Cascadia Code", Menlo, monospace;
     background-color: #212220;
 }
 
@@ -14,9 +20,29 @@ body {
     background-color: #3d3f3b;
     color: #F8F8F8;
     text-align: center;
+    font-size: medium;
+    font-weight: bolder;
+    display: flex;
+    align-items: center;
+    justify-content: end;
 }
 
 #terminal {
     padding: 10px;
     background-color: #2D2E2C;
+}
+
+.sio-icon {
+    border-radius: 50%;
+    width: 0.75rem;
+    height: 0.75rem;
+    margin-right: 0.5rem;
+}
+
+.sio-not-connected {
+    background-color: #CE5C5C;
+}
+
+.sio-connected {
+    background-color: #5BCC5B;
 }
