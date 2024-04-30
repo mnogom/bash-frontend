@@ -1,9 +1,12 @@
 import { Terminal } from '@xterm/xterm';
-import { FitAddon } from 'xterm-addon-fit';
+import { FitAddon } from '@xterm/addon-fit';
+import { WebLinksAddon } from '@xterm/addon-web-links';
 import { io } from "socket.io-client";
-import '@xterm/xterm/css/xterm.css'
 
-let term = new Terminal({
+import '@xterm/xterm/css/xterm.css';
+
+
+const terminal = new Terminal({
     fontFamily: '"Cascadia Code", Menlo, monospace',
     theme: {
         foreground: '#F8F8F8',
@@ -33,36 +36,39 @@ let term = new Terminal({
     cursorStyle: 'block',
     scrollOnUserInput: false,
 });
-console.log(term.cols, term.rows);
 
-// load term
-term.open(document.getElementById('terminal'));
+// load terminal and make focus
+terminal.open(document.getElementById('terminal'));
+terminal.focus();
 
 // fit addon
 const fitAddon = new FitAddon();
-term.loadAddon(fitAddon);
+terminal.loadAddon(fitAddon);
 fitAddon.fit();
 
-// create socket io
+// links addon
+terminal.loadAddon(new WebLinksAddon());
+
+// create & setup socket io
 const sio = io('ws://localhost:8080', {
     path: '/socket.io/',
     transports: ['websocket'],
     query: {
-        "cols": term.cols,
-        "rows": term.rows,
+        "cols": terminal.cols,
+        "rows": terminal.rows,
     }
 });
 
 sio.on('connect', () => {
-    term.clear();
+    terminal.clear();
 })
 
 sio.on('pty', (message) => {
-    term.write(message)
+    terminal.write(message)
 });
 
 // on input terminal
-term.onData((data) => {
+terminal.onData((data) => {
     sio.emit("pty", data)
 });
 
@@ -71,9 +77,7 @@ term.onData((data) => {
 window.addEventListener("resize", (event) => {
     fitAddon.fit()
     sio.emit("resize", {
-        "cols": term.cols,
-        "rows": term.rows,
+        "cols": terminal.cols,
+        "rows": terminal.rows,
     })
 });
-
-document.getElementById('terminal').focus();
