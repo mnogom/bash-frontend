@@ -72,11 +72,14 @@ const sio = io('ws://localhost:8080', {
 
 sio.on('connect', () => {
     terminal.clear();
-    elements.getSioStatus().classList = 'sio-icon sio-connected';
+    elements.getSioStatus().classList.remove('sio-not-connected');
+    elements.getSioStatus().classList.add('sio-connected');
 })
 
 sio.on('disconnect', () => {
-    elements.getSioStatus().classList = 'sio-icon sio-not-connected';
+    terminal.clear();
+    elements.getSioStatus().classList.remove('sio-connected');
+    elements.getSioStatus().classList.add('sio-not-connected');
 })
 
 sio.on('pty', (message) => {

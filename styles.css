@@ -1,7 +1,8 @@
 html,body {
     margin: 0;
     padding: 0;
-    height: 100%;
+    height: 90%;
+    cursor: default;
 }
 
 body {
@@ -13,18 +14,18 @@ body {
     margin: 10px;
     border: 2px solid #3d3f3b;
     border-radius: 5px;
+    background-color: #2D2E2C;
 }
 
 #terminal-head {
+    display: flex;
+    align-items: center;
+    justify-content: end;
     height: 2rem;
-    background-color: #3d3f3b;
     color: #F8F8F8;
     text-align: center;
     font-size: medium;
     font-weight: bolder;
-    display: flex;
-    align-items: center;
-    justify-content: end;
 }
 
 #terminal {
@@ -32,11 +33,13 @@ body {
     background-color: #2D2E2C;
 }
 
-.sio-icon {
+.icon {
     border-radius: 50%;
-    width: 0.75rem;
-    height: 0.75rem;
+    width: 1.2rem;
+    height: 1.2rem;
     margin-right: 0.5rem;
+    margin-left: 0.5rem;
+    background-size: contain;
 }
 
 .sio-not-connected {
@@ -45,4 +48,32 @@ body {
 
 .sio-connected {
     background-color: #5BCC5B;
+}
+
+.github-link {
+    background-image: url("/github.svg");
+}
+
+.telegram-link {
+    background-image: url("/telegram.svg");
+}
+
+.separator {
+    margin-right: 0.5rem;
+    flex-grow: 1;
+}
+
+#terminal-footer {
+    background-color: #3d3f3b;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    height: 1rem;
+}
+
+#version {
+    margin-right: 0.5rem;
+    color: #F8F8F8;
+    text-align: center;
+    font-size: x-small;
 }

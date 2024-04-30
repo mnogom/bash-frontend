@@ -10,10 +10,18 @@
   <body>
     <div id="app">
       <div id="terminal-head">
-        <span id="sio-status" class="sio-icon sio-not-connected"></span>
+        <a class="icon telegram-link" href="https://t.me/mnogo_m" target="_blank" title="Telegram"></a>
+        <a class="icon github-link" href="https://github.com/mnogom" target="_blank" title="GitHub"></a>
+        <span class="separator"></span>
+        <span id="sio-status" class="icon sio-not-connected" title="Socket.IO Connection Status">S</span>
+
       </div>
       <div id="terminal"></div>
+      <div id="terminal-footer">
+        <span id="version">v: 0.1.0</span>
+      </div>
     </div>
+    
     <script type="module" src="/main.js"></script>
   </body>
 </html>
