@@ -93,6 +93,13 @@ terminal.onData((data) => {
     sio.emit('pty', data)
 });
 
+terminal.onKey((data) => {
+    if (data.key === "\x04") {
+        terminal.clearTextureAtlas();
+        sio.disconnect();
+    }
+})
+
 // on resize terminal
 window.addEventListener('resize', (event) => {
     fitAddon.fit()
@@ -101,3 +108,7 @@ window.addEventListener('resize', (event) => {
         'rows': terminal.rows,
     });
 });
+
+elements.getSioStatus().addEventListener('click', () => {
+    sio.connect();
+})
