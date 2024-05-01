@@ -5,6 +5,8 @@ import { io } from 'socket.io-client';
 
 import '@xterm/xterm/css/xterm.css';
 
+const BACKEND_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:8000' : '/';
+
 // create elements
 const elements = {
     getApp: () => document.getElementById('app'),
@@ -24,7 +26,7 @@ const terminal = new Terminal({
         background: '#2D2E2C',
         selection: '#5DA5D533',
         black: '#1E1E1D',
-        brightBlack: '#262625',
+        brightBlack: '#9e9e9e',
         red: '#CE5C5C',
         brightRed: '#FF7272',
         green: '#5BCC5B',
@@ -61,7 +63,7 @@ fitAddon.fit();
 terminal.loadAddon(new WebLinksAddon());
 
 // create & setup socket io
-const sio = io('ws://localhost:8080', {
+const sio = io(BACKEND_URL, {
     path: '/socket.io/',
     transports: ['websocket'],
     query: {
