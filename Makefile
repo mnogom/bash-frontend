@@ -10,7 +10,7 @@ build:
 	@echo "=== 📦 Building ==="
 	npm run build
 
-build-docker:
+build-docker: build
 	@echo "=== 🐳 Building Docker ==="
 	docker build \
 		--tag mnogom/bash-frontend \
