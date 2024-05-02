@@ -48,6 +48,7 @@ const terminal = new Terminal({
     scrollback: 1000,
     cursorStyle: 'block',
     scrollOnUserInput: false,
+    rows: 2,
 });
 
 // load terminal and make focus
@@ -100,14 +101,24 @@ terminal.onKey((data) => {
     }
 })
 
-// on resize terminal
-window.addEventListener('resize', (event) => {
-    fitAddon.fit()
+const debounce = (func, ms)  => {
+  let timeout;
+  return () => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, arguments), ms);
+  };
+}
+
+const emitReize = (event) => {
     sio.emit('resize', {
         'cols': terminal.cols,
         'rows': terminal.rows,
     });
-});
+}
+
+// on resize terminal
+window.addEventListener('resize', debounce(emitReize, 400));
+window.addEventListener('resize', () => fitAddon.fit());
 
 elements.getSioStatus().addEventListener('click', () => {
     sio.connect();
