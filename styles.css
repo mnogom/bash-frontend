@@ -40,6 +40,8 @@ body {
     margin-right: 0.5rem;
     margin-left: 0.5rem;
     background-size: contain;
+    background-position: bottom;
+    background-repeat: no-repeat;
 }
 
 .sio-not-connected {
