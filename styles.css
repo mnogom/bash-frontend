@@ -1,13 +1,16 @@
 html,body {
     margin: 0;
     padding: 0;
-    height: 90%;
     cursor: default;
+    height: 100vh;
 }
 
 body {
     font-family: "Cascadia Code", Menlo, monospace;
     background-color: #212220;
+    display: flex;
+    flex-direction: column;
+    min-height: auto;
 }
 
 #app {
@@ -15,6 +18,9 @@ body {
     border: 2px solid #3d3f3b;
     border-radius: 5px;
     background-color: #2D2E2C;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 #terminal-head {
@@ -29,6 +35,7 @@ body {
 }
 
 #terminal {
+    flex-grow: 1;
     padding: 10px;
     background-color: #2D2E2C;
 }
