@@ -126,8 +126,10 @@ elements.getSioStatus().addEventListener('click', () => {
 
 Array.from(document.getElementsByClassName('helper-link')).forEach(element => {
     element.addEventListener('click', (event) => {
-        terminal.focus();
         terminal.input(`${element.dataset.bsCommand}\r`);
+        setTimeout(() => {
+            terminal.scrollToTop();
+        }, 300);
     })
 });
 
