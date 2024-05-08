@@ -77,13 +77,13 @@ sio.on('connect', () => {
     terminal.clear();
     elements.getSioStatus().classList.remove('sio-not-connected');
     elements.getSioStatus().classList.add('sio-connected');
-})
+});
 
 sio.on('disconnect', () => {
     terminal.clear();
     elements.getSioStatus().classList.remove('sio-connected');
     elements.getSioStatus().classList.add('sio-not-connected');
-})
+});
 
 sio.on('pty', (message) => {
     terminal.write(message)
@@ -99,7 +99,7 @@ terminal.onKey((data) => {
         terminal.clearTextureAtlas();
         sio.disconnect();
     }
-})
+});
 
 const debounce = (func, ms)  => {
     let timeout;
@@ -107,14 +107,14 @@ const debounce = (func, ms)  => {
         clearTimeout(timeout);
         timeout = setTimeout(() => func.apply(this, arguments), ms);
     };
-}
+};
 
 const emitReize = (event) => {
     sio.emit('resize', {
         'cols': terminal.cols,
         'rows': terminal.rows,
     });
-}
+};
 
 // on resize terminal
 window.addEventListener('resize', debounce(emitReize, 400));
@@ -122,4 +122,16 @@ window.addEventListener('resize', () => fitAddon.fit());
 
 elements.getSioStatus().addEventListener('click', () => {
     sio.connect();
-})
+});
+
+Array.from(document.getElementsByClassName('helper-link')).forEach(element => {
+    element.addEventListener('click', (event) => {
+        terminal.focus();
+        terminal.input(`${element.dataset.bsCommand}\r`);
+    })
+});
+
+document.getElementById('helper-icon').addEventListener('click', () => {
+    document.getElementById('helper').classList.toggle('helper-show');
+    document.getElementById('helper-icon').classList.toggle('helper-icon-rotared');
+});
