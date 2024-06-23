@@ -1,6 +1,6 @@
 FROM nginx:1.26.0-alpine-slim as base
 
-COPY nginx/with-ssl.conf /etc/nginx/conf.d/default.conf
+COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 COPY nginx/dist/ /var/www
 
 EXPOSE 80
