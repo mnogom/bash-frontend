@@ -85,8 +85,10 @@ sio.on('disconnect', () => {
     elements.getSioStatus().classList.add('sio-not-connected');
 });
 
+let uint8array = new TextEncoder("utf-8").encode("Plain Text");
 sio.on('pty', (message) => {
-    terminal.write(message)
+    let str_message = new TextDecoder().decode(message);
+    terminal.write(str_message)
 });
 
 // on input terminal
