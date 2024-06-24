@@ -49,6 +49,7 @@ const terminal = new Terminal({
     cursorStyle: 'block',
     scrollOnUserInput: false,
     rows: 2,
+    scrollOnUserInput: true,
 });
 
 // load terminal and make focus
