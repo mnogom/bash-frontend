@@ -86,16 +86,12 @@ sio.on('disconnect', () => {
     elements.getSioStatus().classList.add('sio-not-connected');
 });
 
-let uint8array = new TextEncoder("utf-8").encode("Plain Text");
-sio.on('pty', (message) => {
-    let str_message = new TextDecoder().decode(message);
-    terminal.write(str_message)
-});
+let decoder = new TextDecoder("utf-8");
+sio.on('pty', (message) => terminal.write(decoder.decode(message)));
 
 // on input terminal
-terminal.onData((data) => {
-    sio.emit('pty', data)
-});
+let encoder = new TextEncoder();
+terminal.onData((data) => sio.emit('pty', encoder.encode(data)));
 
 terminal.onKey((data) => {
     if (data.key === "\x04") {
