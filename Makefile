@@ -10,13 +10,14 @@ build:
 	@echo "=== 📦 Building ==="
 	npm run build
 
-build-docker: build
-	@echo "=== 🐳 Building Docker ==="
-	docker build \
-		--tag mnogom/bash-frontend-without-ssl \
-		-f Dockerfile.no-ssl \
-		.; \
-	docker build \
-		--tag mnogom/bash-frontend \
-		-f Dockerfile \
-		.
+build-no-ssl:
+	@echo "=== 🐳 Building Docker no SSL ==="
+	docker build --tag mnogom/bash-frontend-no-ssl --target no-ssl --progress plain .
+
+build-ssl:
+	@echo "=== 🐳 Building Docker with SSL ==="
+	docker build --tag mnogom/bash-frontend --progress plain .
+
+
+build-docker: build-no-ssl build-ssl
+
