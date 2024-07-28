@@ -20,7 +20,10 @@ const elements = {
 
 // create terminal
 const terminal = new Terminal({
-    fontFamily: '"Cascadia Code", Menlo, monospace',
+    fontFamily: '"JetBrains Mono", monospace',
+    fontSize: 14,
+    fontWeight: 400,
+    fontWeightBold: 500,
     theme: {
         foreground: '#F8F8F8',
         background: '#2D2E2C',
