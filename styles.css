@@ -110,9 +110,8 @@ body {
 }
 
 .icon {
-    border-radius: 50%;
-    width: 1.2rem;
     height: 1.2rem;
+    aspect-ratio: 1 / 1;
     margin-right: 0.5rem;
     margin-left: 0.5rem;
     background-size: contain;
@@ -121,23 +120,35 @@ body {
 }
 
 .sio-not-connected {
+    border-radius: 50%;
     background-color: #CE5C5C;
 }
 
 .sio-connected {
+    border-radius: 50%;
     background-color: #5BCC5B;
 }
 
-.github-link {
-    background-image: url("/github.svg");
+.github-icon {
+    background-image: url("/icons/github.svg");
 }
 
-.telegram-link {
-    background-image: url("/telegram.svg");
+.telegram-icon {
+    background-image: url("/icons/telegram.svg");
 }
 
 .helper-icon {
-    background-image: url("/arrow.svg");
+    background-image: url("/icons/arrow.svg");
+}
+
+.aloy-icon {
+    aspect-ratio: 1 / 1;
+    background-image: url("/icons/aloy.svg");
+}
+
+.error404-icon {
+    aspect-ratio: 1 / 1;
+    background-image: url("/icons/404.svg");
 }
 
 .helper-icon-rotared {

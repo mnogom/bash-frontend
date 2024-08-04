@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="stylesheet" href="/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404</title>
+    <style>
+      video {
+        flex-grow: 1;
+        position: fixed;
+        height: 100%;
+        text-align: center;
+        margin: auto;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .error {
+        margin-top: 5%;
+        z-index: 100;
+        color: white;
+        text-align: center;
+      }
+      .title {
+        font-size: xx-large;
+        font-weight: 800;
+      }
+      .text {
+        font-size: x-large;
+        font-weight: 500;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="error">
+      <div class="title">404</div>
+      <div class="text">Page Not Found</div>
+    </div>
+    <video preload="auto" autoplay="true" loop="loop" muted="muted">
+      <source src="/media/404.webm" type="video/webm" />
+    </video>
+  </body>
+</html>

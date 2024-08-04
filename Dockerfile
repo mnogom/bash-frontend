@@ -2,8 +2,9 @@ FROM node:alpine AS build
 WORKDIR /usr/src/app
 COPY ./package.json package-lock.json ./
 RUN npm install
-COPY ./index.html ./main.js ./styles.css ./
+COPY ./index.html ./main.js ./styles.css vite.config.js ./
 COPY ./public/ ./public/
+COPY ./pages/ ./pages/
 RUN npm run build
 
 

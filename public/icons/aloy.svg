@@ -1,0 +1,8 @@
+<svg width="45px" height="45px" viewBox="0 0 45 45" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="aloy" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <polygon id="Rectangle-6" fill="#589C81" points="0 0 45 0 45 34.3611181 45 45 0 45 0 34.3611181"></polygon>
+        <rect id="Rectangle-6" fill="#82B7B0" x="11.25" y="0" width="34" height="45"></rect>
+        <rect id="Rectangle-6" fill="#2CA0BE" x="22.5" y="0" width="23" height="45"></rect>
+        <rect id="Rectangle-6" fill="#8D5197" x="33.75" y="0" width="11.25" height="45"></rect>
+    </g>
+</svg>
