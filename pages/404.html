@@ -16,6 +16,13 @@
         left: 50%;
         transform: translateX(-50%);
       }
+      video::-webkit-media-controls-volume-slider {
+        display: none;
+      }
+
+      video::-webkit-media-controls-mute-button {
+        display: none;
+      }
       .error {
         margin-top: 5%;
         z-index: 100;
@@ -37,7 +44,15 @@
       <div class="title">404</div>
       <div class="text">Page Not Found</div>
     </div>
-    <video preload="auto" autoplay="true" loop="loop" muted="muted">
+    <video
+      controls
+      controlslist="play nofullscreen nodownload noremoteplayback noplaybackrate nosound"
+      disablepictureinpicture
+      preload="metadata"
+      autoplay="true"
+      loop="loop"
+      muted="muted"
+      playsinline >
       <source src="/media/404.webm" type="video/webm" />
     </video>
   </body>
