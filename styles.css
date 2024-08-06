@@ -129,29 +129,29 @@ body {
     background-color: #5BCC5B;
 }
 
-.github-icon {
+.icon-github {
     background-image: url("/icons/github.svg");
 }
 
-.telegram-icon {
+.icon-telegram {
     background-image: url("/icons/telegram.svg");
 }
 
-.helper-icon {
+.icon-helper {
     background-image: url("/icons/arrow.svg");
 }
 
-.aloy-icon {
+.icon-aloy {
     aspect-ratio: 1 / 1;
     background-image: url("/icons/aloy.svg");
 }
 
-.error404-icon {
+.icon-404 {
     aspect-ratio: 1 / 1;
     background-image: url("/icons/404.svg");
 }
 
-.helper-icon-rotared {
+.icon-helper-rotared {
     transform: rotate(180deg) !important;
 }
 
