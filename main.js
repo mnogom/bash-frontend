@@ -137,5 +137,5 @@ Array.from(document.getElementsByClassName('helper-link')).forEach(element => {
 
 document.getElementById('helper-icon').addEventListener('click', () => {
     document.getElementById('helper').classList.toggle('helper-show');
-    document.getElementById('helper-icon').classList.toggle('helper-icon-rotared');
+    document.getElementById('helper-icon').classList.toggle('icon-helper-rotared');
 });
